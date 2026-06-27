@@ -4,162 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>页面正在建设 · 霸中GakuseiHouse</title>
-    <style>
-        /* ===== 全局重置 & 字体 ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-            background: #f5f7fa;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            color: #1a2332;
-        }
-
-        /* ===== 主卡片 ===== */
-        .construction-card {
-            max-width: 560px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 32px;
-            padding: 56px 40px 44px;
-            box-shadow: 0 20px 60px rgba(10, 22, 40, 0.10);
-            text-align: center;
-            border: 1px solid rgba(201, 168, 76, 0.20);
-            transition: transform 0.3s ease;
-        }
-
-        .construction-card:hover {
-            transform: translateY(-4px);
-        }
-
-        /* ===== 图标 ===== */
-        .icon-wrapper {
-            width: 96px;
-            height: 96px;
-            background: linear-gradient(145deg, #0f1f3a, #1a3355);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            box-shadow: 0 8px 28px rgba(10, 22, 40, 0.18);
-        }
-
-        .icon-wrapper span {
-            font-size: 48px;
-            line-height: 1;
-        }
-
-        /* ===== 标题 & 描述 ===== */
-        .title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #0a1628;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-        }
-
-        .title em {
-            color: #c9a84c;
-            font-style: normal;
-        }
-
-        /* 英文副标题 */
-        .subtitle-en {
-            font-size: 15px;
-            font-weight: 400;
-            color: #8a9aa8;
-            letter-spacing: 2px;
-            margin-bottom: 18px;
-            font-style: italic;
-        }
-
-        .sub-desc {
-            font-size: 15px;
-            color: #6a7a8a;
-            line-height: 1.8;
-            margin-bottom: 32px;
-        }
-
-        /* ===== 返回按钮 ===== */
-        .btn-back {
-            display: inline-block;
-            background: #0a1628;
-            color: #fff;
-            padding: 14px 44px;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.25s;
-            border: none;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 14px rgba(10, 22, 40, 0.15);
-        }
-
-        .btn-back:hover {
-            background: #c9a84c;
-            color: #0a1628;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(201, 168, 76, 0.30);
-        }
-
-        /* ===== 底部提示 ===== */
-        .footer-note {
-            margin-top: 28px;
-            font-size: 13px;
-            color: #aab5c0;
-        }
-
-        .footer-note a {
-            color: #c9a84c;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .footer-note a:hover {
-            color: #b8922e;
-        }
-
-        /* ===== 响应式 ===== */
-        @media (max-width: 480px) {
-            .construction-card {
-                padding: 36px 24px 32px;
-            }
-
-            .title {
-                font-size: 22px;
-            }
-
-            .subtitle-en {
-                font-size: 13px;
-            }
-
-            .icon-wrapper {
-                width: 72px;
-                height: 72px;
-            }
-            .icon-wrapper span {
-                font-size: 36px;
-            }
-
-            .btn-back {
-                padding: 12px 32px;
-                font-size: 14px;
-            }
-        }
-    </style>
+    
+<link rel="stylesheet" href="css/generall.css">
+<link rel="stylesheet" href="css/nothing.css">
+    
 </head>
 <body>
 
@@ -172,14 +20,15 @@
         <!-- 主标题 -->
         <div class="title">页面正在<em>建设</em></div>
 
-        <!-- 英文副标题 (we are building hard) -->
+        <!-- 英文副标题 (We are building hard!) -->
         <div class="subtitle-en">we are building hard</div>
 
         <!-- 描述 -->
         <p class="sub-desc">
-            感谢您的耐心等待，我们正在全力打造更好的内容。<br />
+            稍安勿躁，我们正在全力打造更好的内容。<br />
             不久之后，这里将焕然一新。
         </p>
+        <p class="sub-desc">您也可以向我们投稿您的文章内容。投稿邮箱：pumpkin pies107@outlook.com，恭候您的创意。</p>
 
         <!-- 返回按钮 -->
         <a href="#" class="btn-back" onclick="history.back(); return false;">← 返回上一页</a>
