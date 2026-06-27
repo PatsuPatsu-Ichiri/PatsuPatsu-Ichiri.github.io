@@ -1,0 +1,211 @@
+/* ===== 文章详情主体 ===== */
+.article-wrapper {
+    padding: 40px 0 60px;
+}
+.article-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    padding: 40px 48px;
+    border: 1px solid #f0f3f8;
+    transition: all 0.2s;
+}
+.breadcrumb {
+    font-size: 14px;
+    color: #8a9aa8;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.breadcrumb a {
+    color: #6a7a8a;
+    transition: color 0.2s;
+}
+.breadcrumb a:hover {
+    color: #c9a84c;
+}
+.breadcrumb .sep {
+    color: #d0d7e0;
+}
+.breadcrumb .current {
+    color: #1a2332;
+    font-weight: 500;
+}
+.article-header {
+    border-bottom: 2px solid #eef2f7;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+}
+.article-header .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #c9a84c;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(201, 168, 76, 0.08);
+    padding: 2px 14px;
+    border-radius: 30px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+}
+.article-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0a1628;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: #8a9aa8;
+}
+.article-meta .date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.article-meta .date::before {
+    content: "📅";
+    font-size: 14px;
+}
+.article-meta .views {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.article-meta .views::before {
+    content: "👁️";
+    font-size: 14px;
+}
+.article-body {
+    font-size: 17px;
+    color: #1e2a3a;
+    line-height: 1.9;
+}
+.article-body p {
+    margin-bottom: 24px;
+}
+.article-body h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 36px 0 16px;
+    color: #0a1628;
+    padding-left: 12px;
+    border-left: 4px solid #c9a84c;
+}
+.article-body h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    color: #0f1f3a;
+}
+.article-body blockquote {
+    background: #f8faff;
+    border-left: 4px solid #c9a84c;
+    padding: 18px 24px;
+    margin: 24px 0;
+    border-radius: 0 12px 12px 0;
+    color: #2a3a4a;
+    font-style: italic;
+}
+.article-body ul,
+.article-body ol {
+    margin: 16px 0 24px 24px;
+}
+.article-body li {
+    margin-bottom: 8px;
+}
+.article-body .img-placeholder {
+    background: #f0f3f8;
+    border-radius: 14px;
+    padding: 40px 20px;
+    text-align: center;
+    color: #8a9aa8;
+    border: 1px dashed #d0d7e0;
+    margin: 28px 0;
+    font-size: 15px;
+}
+.article-body .img-placeholder i {
+    font-style: normal;
+    display: block;
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+.article-footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #eef2f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.article-footer .tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.article-footer .tags span {
+    background: #f0f3f8;
+    padding: 4px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    color: #4a5a6a;
+}
+.article-footer .share {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.article-footer .share a {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: #f0f3f8;
+    font-size: 13px;
+    color: #4a5a6a;
+    transition: all 0.2s;
+}
+.article-footer .share a:hover {
+    background: #0a1628;
+    color: #ffd866;
+}
+
+@media (max-width: 768px) {
+    .article-card {
+        padding: 24px 20px;
+    }
+    .article-header h1 {
+        font-size: 24px;
+    }
+    .article-body {
+        font-size: 16px;
+    }
+    .article-meta {
+        gap: 12px;
+        font-size: 13px;
+    }
+}
+@media (max-width: 480px) {
+    .article-card {
+        padding: 16px 14px;
+    }
+    .article-header h1 {
+        font-size: 20px;
+    }
+    .article-body {
+        font-size: 15px;
+    }
+    .article-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
