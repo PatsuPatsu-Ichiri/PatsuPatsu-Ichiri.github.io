@@ -1,0 +1,7 @@
+﻿(function () {
+    'use strict';
+
+    window.POWER_GRAYSCALE_CONFIG = {"Enabled":false,"StartDateTime":"2022-11-30T18:00:03","EndDateTime":"2022-12-09T23:55:02"};
+    window.POWER_LEAVESITEPROMPTS_CONFIG = {"LeaveSitePrompts":{"0":"OnShow","1":"PlatformConfig"},"DomainWhitelist":["www.hysbz.com"]};
+    window.POWER_WEIXINSHARE_CONFIG = {"WeixinShareItems":{"1":false}};
+}());

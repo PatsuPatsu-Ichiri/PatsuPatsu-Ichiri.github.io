@@ -1,0 +1,546 @@
+﻿/* 视频播放功能CSS */
+video.edui-upload-video {
+    display: none;
+}
+/* 修复播放器不居中 */
+.videoPlayer {
+    margin: 0 auto;
+}
+
+div[data-power-ui=advertisement_fixed] .fixedCount {
+    margin-right: 5px;
+    font-size: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    text-align: right;
+    line-height: 18px;
+    height: 18px;
+}
+
+    div[data-power-ui=advertisement_fixed] .fixedCount a {
+        background-color: #a9a9a9;
+        padding: 0px 10px 0px 10px;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+        div[data-power-ui=advertisement_fixed] .fixedCount a.seld {
+            color: #c71585;
+        }
+/* 漂浮广告 */
+.floatPosition {
+    -moz-box-shadow: 0px 0px 4px #333333;
+    -webkit-box-shadow: 0px 0px 4px #333333;
+    box-shadow: 0px 0px 4px #333333;
+}
+
+    .floatPosition a.close {
+        display: block;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        line-height: 17px;
+        position: absolute;
+        font-family: "Microsoft YaHei", SimSun, Arial, Helvetica, Tahoma, sans-serif;
+        font-weight: 100;
+        top: 2px;
+        right: 2px;
+        font-size: 20px;
+        text-decoration: none;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px;
+        background: #333;
+        background: rgba(0, 0, 0, .5);
+        color: #fff;
+        text-align: center;
+    }
+
+        .floatPosition a.close:hover {
+            background: #000;
+            color: #fff;
+        }
+/*时间选择左右箭头定义*/
+.datetimepicker table {
+    line-height: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+    /*临时处理*/
+    .datetimepicker table th {
+        font-weight: bold;
+    }
+
+.datetimepicker.dropdown-menu i {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+.datetimepicker.dropdown-menu .icon-arrow-left {
+    background: url(../../base/img/icon.png) -242px -77px no-repeat;
+}
+
+.datetimepicker.dropdown-menu .icon-arrow-right {
+    background: url(../../base/img/icon.png) -259px -77px no-repeat;
+}
+/* 处理表格被自动排版后加了P后引起问题 重置表格样式 */
+.printArea .conTxt table td p {
+    margin: 0 !important;
+    text-indent: 0px !important
+}
+/*编辑器内的表格在前台展示时滚动条的显示*/
+.ueditortable {
+    display: block;
+    overflow: auto;
+    border: 1px solid #F8F8F8;
+}
+
+    .ueditortable td {
+        border: 1px solid #ddd;
+    }
+
+        .ueditortable td[class^="xl"],
+        .ueditortable td[class^="et"] {
+            border: 1px solid #000000;
+        }
+
+.tablemask {
+    background-color: #000000;
+    position: fixed;
+    z-index: 3000;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    bottom: 0px;
+    opacity: 0.5;
+}
+
+.ueditortable .expandtable {
+    margin: auto;
+    width: 800px;
+    position: absolute;
+}
+
+.printArea .conTxt .expandtable a {
+    color: black;
+    padding: 5px 15px 7px 15px;
+    background-color: gainsboro;
+    opacity: 0.9;
+}
+
+.ueditortable tbody {
+    background-color: white;
+}
+
+.newueditortable .compresstable {
+    text-align: center;
+    margin: auto;
+    display: inline-block;
+}
+
+    .newueditortable .compresstable a {
+        color: black;
+        text-decoration: none;
+        padding: 5px 15px 7px 15px;
+        background-color: gainsboro;
+        opacity: 0.9;
+    }
+
+.newueditortable {
+    top: 8%;
+    position: fixed;
+    z-index: 5000;
+    overflow: auto;
+    border: 2px solid #F8F8F8;
+}
+
+    .newueditortable td {
+        border: solid;
+    }
+
+    .newueditortable table {
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .newueditortable .newwindowtable {
+        display: inline-block;
+        padding: 0px 15px 1px 15px;
+        background-color: gainsboro;
+        opacity: 0.9;
+        margin-right: 10px;
+    }
+
+        .newueditortable .newwindowtable a {
+            color: black;
+            text-decoration: none;
+        }
+
+    .newueditortable .newclass {
+        width: 100%;
+        height: 0px;
+        text-align: center;
+        position: fixed;
+    }
+/*内容页审核人员昵称样式*/
+.auditRecordcss {
+    clear: both;
+    color: #888;
+    float: right;
+}
+
+    .auditRecordcss span {
+        margin-left: 20px;
+    }
+/* 节点归档图标 */
+#nodeArchive {
+    font-size: 14px;
+    position: absolute;
+    width: 200px;
+    height: 125px;
+    text-align: center;
+    right: 10px;
+    top: 10px;
+    z-index: 1;
+    background: url(../img/nodearchive.png) center 20px no-repeat;
+}
+/* 信息公开废止图标 */
+.icon-fz {
+    display: block;
+    width: 218px;
+    height: 140px;
+    background: url(../img/icon-fz.png) no-repeat;
+    position: absolute;
+    right: 100px;
+    top: 150px;
+    z-index: 1;
+}
+
+#nodeArchive span {
+    font-size: 14px;
+    color: #ff0000;
+}
+
+.subheading {
+    font-size: 16px;
+}
+
+.ct {
+    text-align: center;
+}
+/* pdf 分页功能 */
+.pdf-page {
+    overflow: hidden;
+    margin: 10px auto;
+    text-align: center;
+}
+
+    .pdf-page button,
+    .pdf-page .page-num,
+    .pdf-page .pdf-download {
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        padding: 4px 15px;
+        margin: 0 5px;
+        vertical-align: top;
+        font-size: 14px;
+        border: 1px solid #d4d4d4;
+        background: none;
+        outline: none;
+        border-radius: 2px;
+    }
+
+    .pdf-page .page-num,
+    .pdf-page .pdf-download {
+        height: 19px;
+        line-height: 19px;
+        color: #999;
+    }
+
+    .pdf-page .pdf-download {
+        color: #333 !important;
+        border-color: #ccc;
+        background-color: #f0f0f0;
+    }
+
+    .pdf-page button:hover {
+        border: 1px solid #ccc;
+        background-color: #f0f0f0;
+    }
+
+    .pdf-page .pdf-download:hover {
+        background-color: #ccc;
+    }
+
+img[data-uitype='pdf'] {
+    visibility: hidden;
+}
+/*内容页-智能标签*/
+.articleCon .smart-tags {
+    font-weight: normal;
+    margin: 5px 0;
+}
+
+    .articleCon .smart-tags label {
+        display: inline-block;
+        background: url(/content/_common/fulltextsearch/img/icon_tag.png) no-repeat left center;
+        padding-left: 25px;
+        cursor: default;
+    }
+
+    .articleCon .smart-tags a {
+        display: inline-block !important;
+        margin-right: 5px;
+    }
+
+        .articleCon .smart-tags a:hover {
+            color: #f00;
+            text-decoration: underline;
+        }
+
+        .articleCon .smart-tags a span {
+            color: #f00;
+        }
+/*内容页-点赞与收藏*/
+.likes-group {
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 50px;
+    height: 110px;
+}
+
+    .likes-group li {
+        width: 60px;
+        border-radius: 30px;
+        height: 60px;
+        background: #f0f0f0;
+        display: inline-block;
+    }
+
+    .likes-group a {
+        font-size: 12px;
+        padding-top: 28px;
+        display: inline-block;
+    }
+
+    .likes-group .Likes {
+        background: url(../img/btnicon.png) no-repeat 4px -103px;
+    }
+
+    .likes-group .Collection {
+        background: url(../img/btnicon.png) no-repeat 4px -45px;
+    }
+
+    .likes-group .addLikes {
+        background: url(../img/btnicon.png) no-repeat 10px -346px;
+    }
+
+    .likes-group .addCollection {
+        background: url(../img/btnicon.png) no-repeat 15px -288px;
+    }
+/* 微信支付 */
+.weixin-pay {
+    position: relative;
+    display: inline-block;
+    width: 900px;
+    height: 600px;
+    background: white;
+    overflow: hidden;
+}
+
+    .weixin-pay .pay-qrcode,
+    .weixin-pay .pay-case {
+        position: absolute;
+        display: inline-block;
+        width: 350px;
+        height: 450px;
+        bottom: 0;
+    }
+
+    .weixin-pay .pay-qrcode {
+        left: 100px;
+        top: 150px;
+    }
+
+    .weixin-pay .pay-case {
+        left: 500px;
+        top: 125px;
+    }
+
+    .weixin-pay .pay-qrcode p {
+        font-size: 12px;
+    }
+
+    .weixin-pay .pay-qrcode img {
+        margin-top: 15px;
+        width: 260px;
+        border: 1px solid #ddd;
+    }
+
+    .weixin-pay .pay-case img {
+        width: 350px;
+    }
+
+    .weixin-pay .pay-logo {
+        position: absolute;
+        width: 200px;
+        left: 60px;
+        top: 30px;
+    }
+
+    .weixin-pay .pay-fee {
+        position: absolute;
+        text-align: left;
+        left: 150px;
+        top: 100px;
+        font-size: 16px;
+    }
+
+        .weixin-pay .pay-fee h1 {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .weixin-pay .pay-fee text {
+            font-weight: bold;
+            color: red;
+        }
+
+    .weixin-pay .pay-tips {
+        display: none;
+        margin-top: 280px;
+        font-size: 24px;
+        line-height: 40px;
+    }
+
+        .weixin-pay .pay-tips img {
+            width: 40px;
+        }
+/* 支付宝支付 */
+.ali-pay {
+    position: relative;
+    display: inline-block;
+    width: 900px;
+    height: 600px;
+    background: white;
+    overflow: hidden;
+}
+
+    .ali-pay .pay-qrcode,
+    .ali-pay .pay-case {
+        position: absolute;
+        display: inline-block;
+        width: 350px;
+        height: 450px;
+        bottom: 0;
+    }
+
+    .ali-pay .pay-qrcode {
+        left: 100px;
+        top: 150px;
+    }
+
+    .ali-pay .pay-case {
+        left: 450px;
+        top: 125px;
+    }
+
+    .ali-pay .pay-qrcode p {
+        font-size: 12px;
+    }
+
+    .ali-pay .pay-qrcode img {
+        margin-top: 15px;
+        width: 260px;
+        border: 1px solid #ddd;
+    }
+
+    .ali-pay .pay-case img {
+        width: 250px;
+    }
+
+    .ali-pay .pay-logo {
+        position: absolute;
+        width: 150px;
+        left: 60px;
+        top: 30px;
+    }
+
+    .ali-pay .pay-fee {
+        position: absolute;
+        text-align: left;
+        left: 150px;
+        top: 100px;
+        font-size: 16px;
+    }
+
+        .ali-pay .pay-fee h1 {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .ali-pay .pay-fee text {
+            font-weight: bold;
+            color: red;
+        }
+
+    .ali-pay .pay-tips {
+        display: none;
+        margin-top: 280px;
+        font-size: 24px;
+        line-height: 40px;
+    }
+
+        .ali-pay .pay-tips img {
+            width: 40px;
+        }
+
+.pay-box .cancel-pay {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    color: #337ab7;
+}
+
+.pay-box .again-pay {
+    font-size: 14px;
+    color: #337ab7;
+}
+
+/* 签收 */
+.signinuserlabel .sHd{height:40px; line-height:40px; margin-bottom:5px;}
+.signinuserlabel .sHd h3{float:left; font-size:18px; font-weight:bold; color:#666}
+.signinuserlabel .sHd .signinBtn{float:right;}
+.signinuserlabel .sHd .signinBtn a{display:block; height:38px; line-height:38px; background:#fe2400; color:#fff; padding:0 20px; border-radius:6px; overflow:hidden; font-weight:bold; text-decoration:none}
+
+/* 签收-罗列式 */
+.signinLogStyle-1{margin-bottom:10px;}
+.signinLogStyle-1 .signinLogList{overflow:hidden; border:1px solid #d8d8d8; padding:10px 20px;}
+.signinLogStyle-1 .signinLogList li{float:left;min-width: 10%;font-size:14px;line-height:28px; box-sizing: border-box; padding-right:10px;}
+.signinLogStyle-1 .signinLogList li .icon-signed{width:20px;height:28px;background: url(../img/icons-userLogged-on.png) -30px -26px no-repeat;display:inline-block;vertical-align:top;margin-left: -6px;background-size: 80px auto;}
+.signinLogStyle-1 .signinLogList li span:hover{color:#337ab7}
+
+/* 签收-分状态 */
+.signinLogStyle-2{margin-bottom:10px;}
+.signinLogStyle-2 .sBd{border:1px solid #d8d8d8; padding:10px 20px; overflow:hidden;}
+.signinLogStyle-2 .signinLogList{padding:0 5px 15px;}
+.signinLogStyle-2 .signinLogList h3{height:30px; line-height:30px; font-size:14px; font-weight:bold; margin-bottom:10px; color:#666}
+.signinLogStyle-2 .signinLogList ul{overflow:hidden;}
+.signinLogStyle-2 .signinLogList ul li{float:left; min-width: 10%; font-size:14px; line-height:28px; box-sizing: border-box; padding-right:10px;}
+.signinLogStyle-2 .signed-yes{border-bottom:1px dashed #d8d8d8; margin-bottom:15px;}
+
+/* 签收-表格式 */
+.signinLogStyle-3{margin-bottom:10px;}
+.signinLogStyle-3 .sBd{margin:0 auto; overflow-y:auto; max-height:370px  }
+.signinLogStyle-3 .sBd table{width:100%; border-left:1px solid #d8d8d8; border-top:1px solid #d8d8d8;}
+.signinLogStyle-3 .sBd table td,
+.signinLogStyle-3 .sBd table th{padding:8px 5px; border-bottom:1px solid #d8d8d8; border-right:1px solid #cccccc; text-align:center; line-height:24px; font-size:14px;}
+.signinLogStyle-3 .sBd table th{font-weight:bold; background:#d9dde9}
+.signinLogStyle-3 .sBd table tr:nth-child(2n+1) td{background:#f6f6f6}
+.signinLogStyle-3 .sBd table .status .s0{color:#666}
+.signinLogStyle-3 .sBd table .status .s1{color:#069400}
+.signinLogStyle-3 .sBd table .status .s2{color:#fe0000}

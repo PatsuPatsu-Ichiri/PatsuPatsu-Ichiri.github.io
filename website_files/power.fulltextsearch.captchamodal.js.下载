@@ -1,0 +1,107 @@
+﻿var _pallback = function () {};
+$(function () {
+    $("[data-id=search]").click(function () {
+        if ($("#SearchValidateCode").val() == "") {
+            $(".field-validation-error").html("请输入验证码。");
+            return;
+        }
+
+        $.ajaxPreventCSRF({
+            type: "post",
+            dataType: 'json',
+            async: false,
+            url: $("#SearchValidateCode").attr("data-val-captcha-url"),
+            data: { captcha: $("#SearchValidateCode").val() },
+            success: function (data) {
+                if (data) {
+                    closeModal();
+                    _pallback();
+                } else {
+                    $(".field-validation-error").html($("#SearchValidateCode").attr("data-val-captcha"));
+                    $("#SearchValidateCode").val("");
+                    $("#VolidateCodeDiv .validationcode img").trigger("click");
+                }
+            }
+        });
+    });
+
+    $(".close").click(function () {
+        closeModal();
+    });
+
+    $('#SearchValidateCode')
+        .keydown(function (e) {
+            e = window.event || e;
+            if (e.keyCode == 13) {
+                var $this = $(this);
+                var keyword = encodeURIComponent($this.val());
+                if (keyword) {
+                    $("[data-id=search]").trigger("click");
+                }
+            }
+        });
+});
+
+function validateCode(pallback, validateKeywordEmpty) {
+    if ((validateKeywordEmpty == undefined || validateKeywordEmpty) &&
+        $("input[name=wd]").val() == "" &&
+        $('#isadvancesearch').val() == "false") {
+        alert("请输入关键词");
+        return;
+    }
+
+    _pallback = pallback;
+    var url = $(".search").attr("data-val-captcha-visible-url");
+    $.ajax({
+        type: "get",
+        url: url,
+        dataType: 'text',
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data == "True" && $("#VolidateCodeDiv,.modal-backdrop").length > 0) {
+                openModal();
+                var SearchValidateCode = $("#SearchValidateCode").parent().find("img");
+                if (SearchValidateCode.length == 0) {
+                    refreshValidateCode();
+
+                }
+
+                $.refreshCsrf();
+            } else {
+                closeModal();
+                _pallback();
+            }
+        }
+    });
+}
+
+function openModal() {
+    $("#VolidateCodeDiv,.modal-backdrop").show();
+    $(".field-validation-error").html("");
+    $("#SearchValidateCode").val("");
+    $("body").addClass("modal-open");
+    $("#VolidateCodeDiv .validationcode img").trigger("click");
+}
+
+function closeModal() {
+    $("#VolidateCodeDiv,.modal-backdrop").hide();
+    $("body").removeClass("modal-open");
+}
+
+function refreshValidateCode() {
+    $('#VolidateCodeDiv [data-type=searchcaptcha]')
+        .each(function () {
+            var $captchaImage = $('<img>'),
+                self = $(this),
+                setting = self.data();
+            if (self.find("img").length === 0) {
+                $captchaImage.attr('title', '看不清？换一张');
+                $captchaImage.attr('src', setting.captchaUrl);
+                $captchaImage.click(function () {
+                    $captchaImage.attr('src', setting.captchaUrl + '?code=' + Math.random());
+                });
+                self.append($captchaImage);
+            }
+        });
+}
