@@ -1,0 +1,270 @@
+﻿$(function () {
+    $('.select-box')
+        .setSelect({
+            optionList: eval($('#sitelist').val()),
+            hiddenInput: '#siteid',
+            getOption: '#sOptionBtn',
+            hiddenIdentifierInput: '#loweridentifier',
+            callback: function (option) {}
+        });
+});
+(function ($) {
+    $.fn.setSelect = function (options) {
+        var opt = $.extend({
+                optionList: [],
+                getOption: '',
+                hiddenInput: '',
+                hiddenIdentifierInput: '',
+                callback: function () {}
+            },
+            options || {});
+        return this.each(function () {
+            opt._id = this;
+            var _time;
+            var arrow = $(this).find('dt i');
+
+            var defaultvalue = parseInt($(opt.hiddenInput).val());
+            var defaultoption;
+            if (opt.optionList.length > 0) {
+                $.each(opt.optionList,
+                    function (index, item) {
+                        if (defaultvalue === item.Value) {
+                            defaultoption = item.Name;
+                            return false;
+                        }
+                    });
+                $(opt.getOption).text(defaultoption).attr("title", defaultoption);
+
+                $(opt._id).append('<ul id="selectList"></ul>');
+
+                $.each(opt.optionList,
+                    function (index, item) {
+                        $("#selectList").append('<li data-value="' + item.Value + '" data-identifier="' + item.Identifier + '">' + item.Name + '</li>');
+                    });
+            }
+            else {
+                if (defaultvalue === "-1") {
+                    var defaultidentifier = $(opt.hiddenIdentifierInput).val();
+                    defaultoption = $("#selectList li[data-identifier='" + defaultidentifier + "']").text();
+                    $(opt.getOption).text(defaultoption).attr("title", defaultoption);
+
+                    $("#selectList li").removeClass("active");
+                    $("#selectList li[data-identifier='" + defaultidentifier + "']").addClass("active");
+
+                    $("#selectList .arrow-dd").css({ left: $(this).position().left + "px" })
+                }
+                else {
+                    if (getUrlParam("sids") === '0') {
+                        defaultoption = $("#selectList li[data-value='0']").text();
+                        $(opt.getOption).text(defaultoption).attr("title", defaultoption);
+                    }
+                    else {
+                        defaultoption = $("#selectList li[data-value='" + defaultvalue + "']").text();
+                        $(opt.getOption).text(defaultoption).attr("title", defaultoption);
+                    }
+
+                    $("#selectList li").removeClass("active");
+                    $("#selectList li[data-value='" + defaultvalue + "']").addClass("active");
+                }
+            }
+
+            $(opt._id)
+                .bind({
+                    click: function () {
+                        $(arrow).addClass('arrow-hover');
+                        $('#selectList').show();
+                        $(".select-box-bg").show();
+                        //  clearTimeout(_time);
+                        return false;
+                    }
+                    //,
+                    //mouseleave: function () {
+                    //    _time = setTimeout(function () {
+                    //        $(arrow).removeClass('arrow-hover');
+                    //        $('#selectList').slideUp();
+                    //    }, 300);
+                    //}
+                });
+            //获取选择的值
+            $('#selectList')
+                .delegate('li',
+                    'click',
+                    function () {
+
+                        //点击要清空右边站点的条件。
+                        $('#categorySiteId').val("");
+                        $('#searchitemid').val("");
+                        $('#indexitemid').val("")
+
+                        var option = $(this).text();
+                        var value = $(this).data('value');
+                        if (value === -1) {
+                            var identifier = $(this).data('identifier');
+                            $(opt.hiddenIdentifierInput).val(identifier);
+
+                            $(opt.getOption).text(option).attr("title", option);
+                            $(opt.hiddenInput).val(value);
+
+                            $("#selectList li").removeClass("active");
+                            $("#selectList li[data-identifier='" + identifier + "']").addClass("active");
+                            $('#selectList').hide();
+                            $(".select-box-bg").hide();
+                            $(arrow).removeClass('arrow-hover');
+                            opt.callback(option);
+                        } else {
+                            $(opt.getOption).text(option).attr("title", option);
+                            $(opt.hiddenInput).val(value);
+
+                            $("#selectList li").removeClass("active");
+                            $("#selectList li[data-value='" + value + "']").addClass("active");
+                            $('#selectList').hide();
+                            $(".select-box-bg").hide();
+                            $(arrow).removeClass('arrow-hover');
+                            opt.callback(option);
+                        }
+
+                        var keyword = encodeURIComponent($('#inputkeyword').val());
+                        if (keyword) {
+                            search();
+                        }
+
+                        return false;
+                    });
+
+            $(document)
+                .on('click',
+                    function () {
+                        $('#selectList').hide();
+                        $(".select-box-bg").hide();
+                        $(arrow).removeClass('arrow-hover');
+                    });
+        });
+    };
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) {
+            return decodeURIComponent(r[2]);
+        }
+        return null; //返回参数值
+    }
+
+    function search() {
+        validateCode(function () {
+            var submiturl = $('#submiturl').val();
+            var keyword = encodeURIComponent($('#inputkeyword').val());
+            var searchitemid = $('#searchitemid').val();
+            var sorttype = $('#sorttype').val();
+            var timetype = $('#timetype').val();
+            var begintime = $('#begintime').val().replace('/', '-').replace('/', '-');
+            var endtime = $('#endtime').val().replace('/', '-').replace('/', '-');
+            var isadvancesearch = $('#isadvancesearch').val();
+            var normalsearch = $("#normalsearch").val();
+            var normalsearchpage = $("#normalsearchpage").val();
+            var keywordposition = $('#keywordposition').val();
+            var enablecorrect = $("#enablecorrect").val();
+
+            var indexitemid = $('#indexitemid').val();
+            var categorySiteId = $('#categorySiteId').val();
+
+            var params = '?wd=' +
+                keyword +
+                '&tt=' +
+                timetype +
+                '&bt=' +
+                begintime +
+                '&et=' +
+                endtime;
+            if (keywordposition) {
+                params += '&kp=' +
+                    keywordposition;
+            }
+
+            // 搜索词不同了要复位搜索条件。
+            var wd = encodeURIComponent(getUrlParam("wd"));
+            var keywordtext = encodeURIComponent($('#inputkeyword').val());
+            wd = decodeURIComponent(wd);
+            keywordtext = decodeURIComponent(keywordtext);
+            if (wd != keywordtext) {
+                params = '?wd=' +
+                    keyword +
+                    '&sid=0';
+
+                var validateCode = $("#SearchValidateCode").val();
+                params += '&vc=' + validateCode;
+                window.location.href = submiturl + params;
+            } else {
+                if (isadvancesearch === 'true') {
+                    var queryall = $('#queryall').val();
+                    var queryand = keyword == "" ? $('#queryand').val() : keyword;
+                    var queryor = $('#queryor').val();
+                    var queryno = $('#queryno').val();
+                    var pagesize = $('#pagesize').val();
+                    params += '&as=' +
+                        isadvancesearch +
+                        '&qal=' +
+                        queryall +
+                        '&qad=' +
+                        queryand +
+                        '&qo=' +
+                        queryor +
+                        '&qn=' +
+                        queryno +
+                        '&ps=' +
+                        pagesize;
+                }
+
+                if (normalsearch === 'false') {
+                    params += '&st=' +
+                        sorttype +
+                        '&iiid=' +
+                        indexitemid +
+                        '&siid=' +
+                        searchitemid +
+                        '&csid=' +
+                        categorySiteId;
+                } else {
+                    params += '&st=2' +
+                        '&ns=' +
+                        normalsearch +
+                        '&iiid=' +
+                        indexitemid +
+                        '&siid=' +
+                        searchitemid +
+                        '&csid=' +
+                        categorySiteId;
+                    if (normalsearchpage) {
+                        params += '&nsp=' +
+                            normalsearchpage;
+                    }
+                }
+
+                var siteid = $('#siteid').val();
+                var siteIdentifier = $('#loweridentifier').val();
+                if (siteid) {
+                    params += '&sid=' + siteid;
+                }
+
+                if (siteIdentifier && siteIdentifier != "") {
+                    params += '&lsi=' + siteIdentifier;
+                }
+
+                if (enablecorrect && enablecorrect === 'false') {
+                    params += '&ec=' + enablecorrect;
+                }
+
+                var validateCode = $("#SearchValidateCode").val();
+                params += '&vc=' + validateCode;
+                window.location.href = submiturl + params;
+            }
+        });
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return decodeURIComponent(r[2]); return null; //返回参数值
+        }
+    }
+})(jQuery);
