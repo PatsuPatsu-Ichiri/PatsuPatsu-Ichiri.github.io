@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情 · 霸中GakuseiHouse</title>
+    <style>
+        /* ===== 全局重置 & 基础 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1a2332;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== 顶部栏 ===== */
+        .top-bar {
+            background: #0a1628;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            padding: 8px 0;
+            border-bottom: 2px solid #c9a84c;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .top-bar a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.2s;
+        }
+        .top-bar a:hover {
+            color: #ffd866;
+        }
+
+        .top-bar .split {
+            color: rgba(255, 255, 255, 0.2);
+            margin: 0 10px;
+        }
+
+        .top-bar .right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            background: linear-gradient(135deg, #0f1f3a 0%, #1a3355 100%);
+            padding: 18px 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.35);
+            background: #0a1628;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .logo-text {
+            color: #fff;
+        }
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .logo-text span {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 4px;
+        }
+
+        /* ===== 导航 ===== */
+        .nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(201, 168, 76, 0.18);
+            color: #ffd866;
+        }
+
+        .nav a.active {
+            background: #c9a84c;
+            color: #0a1628;
+        }
+
+        /* ===== 文章详情主体 ===== */
+        .article-wrapper {
+            padding: 40px 0 60px;
+        }
+
+        .article-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            padding: 40px 48px;
+            border: 1px solid #f0f3f8;
+            transition: all 0.2s;
+        }
+
+        /* 面包屑 */
+        .breadcrumb {
+            font-size: 14px;
+            color: #8a9aa8;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: #6a7a8a;
+            transition: color 0.2s;
+        }
+        .breadcrumb a:hover {
+            color: #c9a84c;
+        }
+        .breadcrumb .sep {
+            color: #d0d7e0;
+        }
+        .breadcrumb .current {
+            color: #1a2332;
+            font-weight: 500;
+        }
+
+        /* 文章标题区 */
+        .article-header {
+            border-bottom: 2px solid #eef2f7;
+            padding-bottom: 20px;
+            margin-bottom: 28px;
+        }
+
+        .article-header .tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #c9a84c;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(201, 168, 76, 0.08);
+            padding: 2px 14px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .article-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0a1628;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+            color: #8a9aa8;
+        }
+
+        .article-meta .date {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .article-meta .date::before {
+            content: "📅";
+            font-size: 14px;
+        }
+        .article-meta .views {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .article-meta .views::before {
+            content: "👁️";
+            font-size: 14px;
+        }
+
+        /* 正文内容 */
+        .article-body {
+            font-size: 17px;
+            color: #1e2a3a;
+            line-height: 1.9;
+        }
+
+        .article-body p {
+            margin-bottom: 24px;
+        }
+
+        .article-body h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 36px 0 16px;
+            color: #0a1628;
+            padding-left: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+
+        .article-body h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 28px 0 12px;
+            color: #0f1f3a;
+        }
+
+        .article-body blockquote {
+            background: #f8faff;
+            border-left: 4px solid #c9a84c;
+            padding: 18px 24px;
+            margin: 24px 0;
+            border-radius: 0 12px 12px 0;
+            color: #2a3a4a;
+            font-style: italic;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 16px 0 24px 24px;
+        }
+
+        .article-body li {
+            margin-bottom: 8px;
+        }
+
+        .article-body .img-placeholder {
+            background: #f0f3f8;
+            border-radius: 14px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #8a9aa8;
+            border: 1px dashed #d0d7e0;
+            margin: 28px 0;
+            font-size: 15px;
+        }
+
+        .article-body .img-placeholder i {
+            font-style: normal;
+            display: block;
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        /* 文章底部信息 */
+        .article-footer {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #eef2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .article-footer .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .article-footer .tags span {
+            background: #f0f3f8;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #4a5a6a;
+        }
+
+        .article-footer .share {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .article-footer .share a {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: #f0f3f8;
+            font-size: 13px;
+            color: #4a5a6a;
+            transition: all 0.2s;
+        }
+
+        .article-footer .share a:hover {
+            background: #0a1628;
+            color: #ffd866;
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            background: #0a1628;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 40px 0 30px;
+            text-align: center;
+            font-size: 14px;
+            border-top: 3px solid #c9a84c;
+            margin-top: 20px;
+        }
+
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .footer .footer-links a {
+            color: rgba(255, 255, 255, 0.5);
+            transition: color 0.2s;
+        }
+        .footer .footer-links a:hover {
+            color: #ffd866;
+        }
+
+        .footer .footer-links .split {
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer .copy {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .footer .copy .highlight {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .logo {
+                justify-content: center;
+            }
+            .nav {
+                justify-content: center;
+            }
+
+            .article-card {
+                padding: 24px 20px;
+            }
+
+            .article-header h1 {
+                font-size: 24px;
+            }
+
+            .article-body {
+                font-size: 16px;
+            }
+
+            .article-meta {
+                gap: 12px;
+                font-size: 13px;
+            }
+
+            .top-bar .container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .logo-text h1 {
+                font-size: 18px;
+            }
+            .logo-text span {
+                font-size: 10px;
+            }
+            .nav a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            .article-card {
+                padding: 16px 14px;
+            }
+            .article-header h1 {
+                font-size: 20px;
+            }
+            .article-body {
+                font-size: 15px;
+            }
+            .article-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 顶部栏 ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <span>🌐 欢迎访问霸中Official，由学生主导的校园网站</span>
+        </div>
+    </div>
+
+    <!-- ===== 头部 ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="霸中GakuseiHouse Logo">
+                </div>
+                <div class="logo-text">
+                    <h1>霸中GakuseiHouse</h1>
+                    <span>Campus No.8 Clubhouse</span>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="nothing.html">首页</a>
+                <a href="nothing.html">走进霸中</a>
+                <a href="nothing.html">新闻中心</a>
+                <a href="nothing.html" class="active">文章详情</a>
+                <a href="nothing.html">德育之窗</a>
+                <a href="nothing.html">教学管理</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== 文章详情 ===== -->
+    <main class="article-wrapper">
+        <div class="container">
+            <div class="article-card">
+
+                <!-- 面包屑 -->
+                <div class="breadcrumb">
+                    <a href="nothing.html">首页</a>
+                    <span class="sep">›</span>
+                    <a href="nothing.html">新闻中心</a>
+                    <span class="sep">›</span>
+                    <span class="current">张雪峰老师离世，同学们齐声痛唱《念张师》</span>
+                </div>
+
+                <!-- 文章头部 -->
+                <div class="article-header">
+                    <span class="tag">最新</span>
+                    <h1>张雪峰老师离世，同学们齐声痛唱《念张师》</h1>
+                    <div class="article-meta">
+                        <span class="date">2026-03-25</span>
+                        <span class="views">阅读 286</span>
+                        <span>来源：横暘市帝霸中学 · 学生通讯社</span>
+                    </div>
+                </div>
+
+                <!-- 文章正文 -->
+                <div class="article-body">
+                    <p><strong>横暘市帝霸中学 3 月 25 日讯</strong> 今日下午，全校师生在操场隆重举行张雪峰老师哀悼大会。苍天垂泪，草木含悲，数千名学子手持白菊，齐声痛唱由学生自发创作的《念张师》，歌声响彻校园，在场者无不动容。</p>
+
+                    <div class="img-placeholder">
+                        <i>🕯️</i>
+                        （哀悼大会现场 · 图片示意）
+                    </div>
+
+                    <h2>忆 · 三尺讲台</h2>
+                    <p>张雪峰老师自 2003 年起执教于帝霸中学，二十余年来始终坚守在语文教学一线。他独创的“情境浸润式”教学法，让无数学子重拾对文学的热爱。2025 年教师节，他被评为“横暘市最美教师”，学生赠予他“雪峰先生”的雅号。</p>
+
+                    <blockquote>
+                        “语文不是考试的工具，而是生命的回响。每一个汉字里，都住着我们的祖先和未来。”
+                        <br>—— 张雪峰老师 课堂语录
+                    </blockquote>
+
+                    <h2>念 · 学生心语</h2>
+                    <p>哀悼大会上，高三（7）班学生代表哽咽发言：“张老师常说，文章是心灵的镜子。今天，我们把对他的思念写进每一行诗里。老师，您看，我们都在认真长大。”</p>
+                    <p>随后，全校学生齐声吟唱《念张师》——这首由学生文学社连夜创作的歌曲，以古风旋律配以现代歌词，道尽师生情谊。歌声中，许多同学潸然泪下。</p>
+
+                    <div class="img-placeholder">
+                        <i>📖</i>
+                        （学生手写悼念卡片 · 图片示意）
+                    </div>
+
+                    <h2>续 · 师者精神</h2>
+                    <p>校方表示，将设立“雪峰语文教育基金”，用于支持语文教学创新与贫困学生文学创作。同时，学校图书馆将以张雪峰老师命名，永久收藏他的手稿与藏书。</p>
+                    <p>“先生之风，山高水长。我们怀念他，更要活成他期待的模样。” 校长在悼词中如是说。</p>
+
+                    <p style="color: #6a7a8a; font-size: 15px; margin-top: 32px; border-top: 1px solid #eef2f7; padding-top: 24px;">
+                        <em>记者：王知远 · 摄影：李初夏 · 责编：陈思睿</em>
+                    </p>
+                </div>
+
+                <!-- 文章底部 -->
+                <div class="article-footer">
+                    <div class="tags">
+                        <span># 哀悼</span>
+                        <span># 张雪峰</span>
+                        <span># 师生情</span>
+                        <span># 帝霸中学</span>
+                    </div>
+                    <div class="share">
+                        <a href="#">📤 分享</a>
+                        <a href="#">💬 评论</a>
+                        <a href="#">⭐ 收藏</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== 底部 ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="nothing.html">关于我们</a>
+                <span class="split">|</span>
+                <a href="nothing.html">联系我们</a>
+                <span class="split">|</span>
+                <a href="https://github.com/PatsuPatsu-Ichiri/PatsuPatsu-Ichiri.github.io">Github源码仓库</a>
+            </div>
+            <div class="copy">
+                <p>
+                    <span class="highlight">PatsuPatsu Ichiri</span> 版权所有 &nbsp;·&nbsp;
+                </p>
+                <p style="margin-top:4px; font-size:12px; color:rgba(255,255,255,0.25);">
+                    站长 &nbsp;&nbsp; 投稿邮箱：pumpkinpies107@outlook.com
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
